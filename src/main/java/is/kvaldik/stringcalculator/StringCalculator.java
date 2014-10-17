@@ -7,11 +7,12 @@ public class StringCalculator
 {
 	public static int add(String text)
 	{
+		System.out.println("Running: " + text);
 		if (text.length() > 2)
 			if (text.substring(0,2).equals("//"))
 			{
 				char delimiter = text.charAt(2);
-				String text2 = text.substring(4);
+				String text2 = text.substring(text.indexOf("\n")+1);
 				return addNumbers(text2.split(getDelimiter(text)));
 			}
 		if (text == "")
@@ -30,6 +31,7 @@ public class StringCalculator
 		String exceptionMessage = "Negatives not allowed: ";
 		for (String number : numbers)
 		{
+			System.out.println("Number: " + number);
 			int value = Integer.parseInt(number);
 			if (value < 0)
 				exceptionMessage += number + ",";
@@ -50,8 +52,15 @@ public class StringCalculator
 		{
 			if (text.substring(0,2).equals("//"))
 			{
-				char delimiter = text.charAt(2);
-				return Pattern.quote(String.valueOf(delimiter));
+				String delimiter;
+				// Check for a long delimiter
+				if (text.charAt(2) == '[')
+					delimiter = text.substring(3, text.indexOf("\n")-1);
+				else
+					delimiter = text.substring(2, text.indexOf("\n"));
+				System.out.println("Delimiter1: " + delimiter);
+				System.out.println("Delimiter2: " + Pattern.quote(delimiter));
+				return Pattern.quote(delimiter);
 			}
 		}
 
