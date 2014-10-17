@@ -47,4 +47,16 @@ public class StringCalculatorTest
 	{
 		assertEquals(10, StringCalculator.add("1\n2\n3\n4"));
 	}
+
+	@Test
+	public void testDelimiterSemiColon()
+	{
+		assertEquals(3, StringCalculator.add("//;\n1;2"));
+	}
+
+	@Test
+	public void testDelimiterStar()
+	{
+		assertEquals(6, StringCalculator.add("//*\n1*2*3"));
+	}
 }
