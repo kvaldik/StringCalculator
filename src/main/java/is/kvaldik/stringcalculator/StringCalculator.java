@@ -7,10 +7,10 @@ public class StringCalculator
 	{
 		if (text == "")
 			return 0;
-		else if (text.contains(","))
+		else if (text.contains(",") || text.contains("\n"))
 		{
 			int returnValue = 0;
-			String[] numbers = text.split(",");
+			String[] numbers = text.split("[,\n]");
 			for (String number : numbers)
 				returnValue += Integer.parseInt(number);
 			return returnValue;

@@ -35,4 +35,16 @@ public class StringCalculatorTest
 	{
 		assertEquals(21, StringCalculator.add("1,2,3,4,5,6"));
 	}
+
+	@Test
+	public void testCommaAndLineBreak()
+	{
+		assertEquals(21, StringCalculator.add("1,2\n3,4\n5,6"));
+	}
+
+	@Test
+	public void testLineBreak()
+	{
+		assertEquals(10, StringCalculator.add("1\n2\n3\n4"));
+	}
 }
