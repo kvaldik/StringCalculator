@@ -7,7 +7,6 @@ public class StringCalculator
 {
 	public static int add(String text)
 	{
-		System.out.println("Running: " + text);
 		if (text.length() > 2)
 			if (text.substring(0,2).equals("//"))
 			{
@@ -31,12 +30,13 @@ public class StringCalculator
 		String exceptionMessage = "Negatives not allowed: ";
 		for (String number : numbers)
 		{
-			System.out.println("Number: " + number);
-			int value = Integer.parseInt(number);
+			int value = 0;
+			if (!number.equals("")) 
+				value = Integer.parseInt(number);
 			if (value < 0)
 				exceptionMessage += number + ",";
 			else if (value <= 1000)
-				returnValue += Integer.parseInt(number);
+				returnValue += value;
 		}
 
 		if (exceptionMessage.length() > 23)
@@ -52,15 +52,31 @@ public class StringCalculator
 		{
 			if (text.substring(0,2).equals("//"))
 			{
+				String returnDelimiter = "[";
 				String delimiter;
-				// Check for a long delimiter
+				String subText;
+				// Check for a long delimiter or multiple delimiters
 				if (text.charAt(2) == '[')
-					delimiter = text.substring(3, text.indexOf("\n")-1);
+				{
+					delimiter = text.substring(3, text.indexOf("]"));
+					returnDelimiter += Pattern.quote(delimiter);
+
+					// Deal with multiple delimiters
+					subText = text.substring(text.indexOf("]")+1);
+					while (subText.indexOf("]") >= 0)
+					{
+						delimiter = subText.substring(1, subText.indexOf("]"));
+						returnDelimiter += Pattern.quote(delimiter);
+						subText = subText.substring(subText.indexOf("]")+1);
+					}
+					
+				}
 				else
+				{
 					delimiter = text.substring(2, text.indexOf("\n"));
-				System.out.println("Delimiter1: " + delimiter);
-				System.out.println("Delimiter2: " + Pattern.quote(delimiter));
-				return Pattern.quote(delimiter);
+					returnDelimiter += Pattern.quote(delimiter);
+				}
+				return returnDelimiter + "]";
 			}
 		}
 
