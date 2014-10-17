@@ -12,23 +12,23 @@ public class StringCalculator
 			{
 				char delimiter = text.charAt(2);
 				String text2 = text.substring(4);
-				int returnValue = 0;
-				String[] numbers = text2.split(Pattern.quote(String.valueOf(delimiter)));
-				for (String number : numbers)
-					returnValue += Integer.parseInt(number);
-				return returnValue;
+				return addNumbers(text2.split(Pattern.quote(String.valueOf(delimiter))));
 			}
 		if (text == "")
 			return 0;
 		else if (text.contains(",") || text.contains("\n"))
 		{
-			int returnValue = 0;
-			String[] numbers = text.split("[,\n]");
-			for (String number : numbers)
-				returnValue += Integer.parseInt(number);
-			return returnValue;
+			return addNumbers(text.split("[,\n]"));
 		}
 		else
 			return Integer.parseInt(text);
+	}
+
+	private static int addNumbers(String[] numbers)
+	{
+		int returnValue = 0;
+		for (String number : numbers)
+			returnValue += Integer.parseInt(number);
+		return returnValue;
 	}
 }
