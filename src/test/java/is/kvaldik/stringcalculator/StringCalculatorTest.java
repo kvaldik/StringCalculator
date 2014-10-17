@@ -2,6 +2,8 @@ package is.kvaldik.stringcalculator;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 
 public class StringCalculatorTest
@@ -58,5 +60,24 @@ public class StringCalculatorTest
 	public void testDelimiterStar()
 	{
 		assertEquals(6, StringCalculator.add("//*\n1*2*3"));
+	}
+
+ 	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
+	public void testNegativeNumber()
+	{
+	    thrown.expect(IllegalArgumentException.class);
+	    thrown.expectMessage("Negatives not allowed: -1");
+		StringCalculator.add("-1");
+	}
+
+	@Test
+	public void testNegativeNumbers()
+	{
+	    thrown.expect(IllegalArgumentException.class);
+	    thrown.expectMessage("Negatives not allowed: -1,-3");
+		StringCalculator.add("-1,4,5\n-3,6");
 	}
 }

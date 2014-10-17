@@ -21,14 +21,24 @@ public class StringCalculator
 			return addNumbers(text.split(getDelimiter(text)));
 		}
 		else
-			return Integer.parseInt(text);
+			return addNumbers(new String[] {text});
 	}
 
 	private static int addNumbers(String[] numbers)
 	{
 		int returnValue = 0;
+		String exceptionMessage = "Negatives not allowed: ";
 		for (String number : numbers)
+		{
+			int value = Integer.parseInt(number);
+			if (value < 0)
+				exceptionMessage += number + ",";
 			returnValue += Integer.parseInt(number);
+		}
+
+		if (exceptionMessage.length() > 23)
+			throw new IllegalArgumentException(exceptionMessage.substring(0, exceptionMessage.length()-1));
+
 		return returnValue;
 	}
 
