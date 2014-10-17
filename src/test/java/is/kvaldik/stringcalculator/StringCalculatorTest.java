@@ -1,4 +1,4 @@
-package java.is.kvaldik.stringcalculatortest;
+package is.kvaldik.stringcalculator;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package java.is.kvaldik.stringcalculator;
+package is.kvaldik.stringcalculator;
 
 
 public class StringCalculator
