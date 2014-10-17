@@ -33,7 +33,8 @@ public class StringCalculator
 			int value = Integer.parseInt(number);
 			if (value < 0)
 				exceptionMessage += number + ",";
-			returnValue += Integer.parseInt(number);
+			else if (value <= 1000)
+				returnValue += Integer.parseInt(number);
 		}
 
 		if (exceptionMessage.length() > 23)

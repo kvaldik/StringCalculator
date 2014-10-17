@@ -80,4 +80,16 @@ public class StringCalculatorTest
 	    thrown.expectMessage("Negatives not allowed: -1,-3");
 		StringCalculator.add("-1,4,5\n-3,6");
 	}
+
+	@Test
+	public void testBigNumber()
+	{
+		assertEquals(0, StringCalculator.add("1001"));
+	}
+
+	@Test
+	public void testBigNumbers()
+	{
+		assertEquals(5, StringCalculator.add("1001,2,3\n2000"));
+	}
 }
